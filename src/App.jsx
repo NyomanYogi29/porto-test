@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Interested from './components/Interested';
 import Education from './components/Education';
 import Footer from './components/Footer';
 import CursorTrail from './components/CursorTrail';
+import MatrixCalculator from './pages/MatrixCalculator';
 import blackHoleImg from './assets/black-hole.jpg';
 import whiteHoleImg from './assets/white-hole.jpg';
 import cyberpunkLinesImg from './assets/cyberpunk-dark-mode.jpg';
@@ -99,11 +101,27 @@ function App() {
 
       <Navbar isDark={isDark} onToggleTheme={handleToggleTheme} />
 
-      <main className="relative z-10 mx-auto max-w-5xl px-6">
-        <About isDark={isDark} />
-        <Interested isDark={isDark} />
-        <Education isDark={isDark} />
-      </main>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <main className="relative z-10 mx-auto max-w-5xl px-6">
+              <About isDark={isDark} />
+              <Interested isDark={isDark} />
+              <Education isDark={isDark} />
+            </main>
+          }
+        />
+        <Route
+          path="/tugas-js"
+          element={
+            <main className="relative z-10 mx-auto max-w-5xl px-6">
+              <MatrixCalculator isDark={isDark} />
+            </main>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
 
       <Footer isDark={isDark} />
     </div>
